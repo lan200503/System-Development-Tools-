@@ -1,0 +1,256 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+
+%\usepackage[section]{placeins}
+
+
+
+
+\usepackage{zhnumber} % change section number to chinese
+\renewcommand\thesection{\zhnum{section}}
+\renewcommand \thesubsection {\arabic{section}}
+
+
+
+\begin{document}
+
+
+\title{中国海洋大学\\系统开发工具基础实验报告}
+\author{学生姓名：兰春光\hspace{20}学号：23020007053\hspace{20}指导老师：周小伟}
+\date{\hspace{5}实验时间：\today}
+\maketitle
+\footnotesize\tableofcontents
+
+
+
+
+\section{实验名称：shell工具和脚本，Vim，数据整理}
+
+github 链接：\href{URL}{https://github.com/lan200503/System-Development-Tools-}
+
+
+\section{实验实例（内容和结果）}
+
+\subsection{shell工具和脚本}
+
+\subsubsection{使用 echo \$SHELL 命令可以查看shell}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{echoSHELL.png}
+    \caption{echo \$shell}
+    \label{fig:enter-label}
+\end{figure}
+可以看到当前使用的是bash
+
+\subsubsection{新建一个名为 missing 的文件夹}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image.png}
+    \caption{mkdir missing}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{用 touch 在 missing 文件夹中新建一个叫 semester 的文件}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{touch.png}
+    \caption{touch semester}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{将以下内容一行一行地写入 semester 文件：}
+ \#!/bin/sh \\
+ curl --head --silent https://missing.csail.mit.edu \\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{echo1.png}
+    \caption{echo '' >> <file>}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{尝试执行这个文件。}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{semester.png}
+    \caption{./semester}
+    \label{fig:enter-label}
+\end{figure}
+git bash 和 Linux 的结果不太一样. Linux 会显示权限不足
+
+\subsubsection{查看 chmod 的手册}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{chmod --help.png}
+    \caption{chmod --help}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{使用 chmod 命令改变权限，使 ./semester 能够成功执行，不要使用 sh semester 来执行该程序。}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{chmod +x.png}
+    \caption{chmod +x}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{使用 | 和 > ，将 semester 文件输出的最后更改日期信息，写入主目录下的 last-modified.txt 的文件中}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{semester.png}
+    \caption{./semester | grep "last-modified" > ~/last-modified.txt}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsubsection{ 命令：ls -ahtl --color=auto ，可实现所有文件（包括隐藏文件）、以人类可以理解的格式输出、以最近访问顺序排序、以彩色文本显示输出结果：}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{ls.png}
+    \caption{ls -ahtl --color=auto}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{编写两个bash函数 marco 和 polo 执行下面的操作。}
+每当你执行 marco 时，当前的工作目录应当以某种形式保存，当执行 last polo 时，无论现
+在处在什么目录下，都应当 cd 回到当时执行 marco 的目录。为了方便debug，你可以把代码写在单独的文件marco.sh 中，并通过 source marco.sh 命令，（重新）加载函数。
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{vim.png}
+    \caption{vim编辑}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{source marco.sh.png}
+    \caption{source marco.sh}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsubsection{编写一段bash脚本，运行如下的脚本直到它出错，将它的标
+准输出和标准错误流记录到文件，并在最后输出所有内容。}
+\#!/usr/bin/env bash \\
+n=\$(( RANDOM \% 100 )) \\
+if [[ n -eq 42 ]]; then \\
+    echo "Something went wrong" \\
+    >&2 echo "The error was using magic numbers" \\
+    exit 1\\
+fi\\
+    echo "Everything went according to plan" \\
+将该脚本写入3.sh 中\\
+ \begin{figure}[h]
+     \centering
+     \includegraphics[width=0.5\linewidth]{3-debug.png}
+     \caption{3-debug}
+     \label{fig:enter-label}
+ \end{figure}
+ 
+ \begin{figure}[h]
+     \centering
+     \includegraphics[width=0.5\linewidth]{output.png}
+     \caption{output}
+     \label{fig:enter-label}
+ \end{figure}
+
+\subsubsection{按照最近的使用时间列出文件的命令：find . -type f -print | xargs -d '\n' ls -t}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{find.png}
+    \caption{find . -type f -print | xargs -d '\n' ls -t}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsection{Vim}
+\subsubsection{vim 基本操作}
+普通模式：这是 vim 的默认模式，用于输入命令。\\
+插入模式：用于输入文本。\\
+命令行模式：用于输入命令，如保存文件、退出等。\\
+x：删除光标所在位置的字符\\
+dd：删除整行\\
+d\$：删除从光标位置到行尾的内容\\
+:w 保存\\
+:q 退出\\
+:wq 保存并退出\\
+\subsubsection{替换}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{替换.png}
+    \caption{:\%s/文件2/文件22/g}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsection{数据处理}
+
+
+\subsubsection{mkdir}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{mkdir.png}
+    \caption{mkdir missing-semester}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{cat}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{cat.png}
+    \caption{cat file2.txt}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{grep}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{grep.png}
+    \caption{grep "文件" file2.txt}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{awk}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{awk.png}
+    \caption{awk 'NR==2' file2.txt}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsubsection{sed}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{sed.png}
+    \caption{sed 's/old/new/g' file2.txt > file1.txt}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{rm}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{rm.png}
+    \caption{rm file1.txt}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{mv}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{mv.png}
+    \caption{mv file2.txt file22.txt}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\section{解题感悟}
+学习 Shell 工具和脚本、Vim 编辑器以及数据整理，让我深刻体会到了命令行的强大和灵活性。Shell 脚本自动化处理任务的能力极大地提高了工作效率。 Vim 作为高效的文本编辑器，在代码编辑时更加灵活便捷。数据整理则让我更加熟悉对文件等一系列操作。希望以后能系统性地学习Linux 系统。
+
+
+\end{document}

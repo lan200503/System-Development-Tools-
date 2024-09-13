@@ -1,0 +1,511 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+
+%\usepackage[section]{placeins}
+\usepackage{listings}
+\usepackage{color}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{frame=tb,
+    language=Python,
+    aboveskip=3mm,
+    belowskip=3mm,
+    showstringspaces=false,
+    columns=flexible,
+    basicstyle={\small\ttfamily},
+    numbers=left,%设置行号位置none不显示行号
+    %numberstyle=\tiny\courier, %设置行号大小
+    numberstyle=\tiny\color{gray},
+    keywordstyle=\color{blue},
+    commentstyle=\color{dkgreen},
+    stringstyle=\color{mauve},
+    breaklines=true,
+    breakatwhitespace=true,
+    escapeinside=``,%逃逸字符(1左面的键)，用于显示中文例如在代码中`中文...`
+    tabsize=4,
+    extendedchars=false %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+}
+
+
+
+\usepackage{zhnumber} % change section number to chinese
+\renewcommand\thesection{\zhnum{section}}
+\renewcommand \thesubsection {\arabic{section}}
+
+
+
+\begin{document}
+
+
+\title{中国海洋大学\\系统开发工具基础实验报告}
+\author{学生姓名：兰春光\hspace{20}学号：23020007053\hspace{20}指导老师：周小伟}
+\date{\hspace{5}实验时间：\today}
+\maketitle
+\footnotesize\tableofcontents
+
+
+
+
+\section{实验名称：python基础，python视觉应用}
+
+github 链接：\href{URL}{https://github.com/lan200503/System-Development-Tools-}
+
+
+\section{实验实例（内容和结果）}
+
+\subsection{python 基础}
+
+\subsubsection{编写 Hello World 程序。}
+\begin{lstlisting}
+print("Hello world!")
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{hello world.png}
+    \caption{hello world}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+\subsubsection{编写程序，生成一个包含 20 个随机整数的列表并对偶数下标的元素进行降序排列，奇数下标的元素不变。}
+\begin{lstlisting}
+import random
+
+ls = [random.random() for i in range(20)]
+print('ls:', ls)
+ls[::2] = sorted(ls[::2],reverse=True)
+print("resorted ls:", ls)
+\end{lstlisting}
+
+本地import random 有问题 所以使用网站在线运行
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{random.png}
+    \caption{random}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+\subsubsection{编写一个程序，让用户输入一个年份，判断这一年是不是闰年。如果是输出 True，不是则输出 False。}
+\begin{lstlisting}
+year = int(input("请输入年份："))
+
+result = (year % 400 == 0) or (year % 4 ==0 and year % 100 !=0)
+
+print("结果是：",result)
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{isLeapYear.png}
+    \caption{isLeapYear}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{阅读程序，理解字典的用法。}
+\begin{lstlisting}
+print('''|---欢迎进入通讯录程序---|
+ |---1、查询联系人资料---|
+ |---2、插入新的联系人---|
+ |---3、删除已有联系人---|
+ |---4、退出通讯录程序---|''')
+ addressBook = {}  # 定义通讯录
+while 1:
+ temp = input('请输入指令代码：')
+ if not temp.isdigit():
+ print("输入的指令错误，请按照提示输入")
+ continue
+ item = int(temp)  # 转换为数字
+if item == 4:
+ print("|---感谢使用通讯录程序---|")
+ break
+ name = input("请输入联系人姓名：")
+ if item == 1:
+ if name in addressBook:
+ print(name, ':', addressBook[name])
+ continue
+ else:
+ print("该联系人不存在！")
+ if item == 2:
+ if name in addressBook:
+ print("您输入的姓名在通讯录中已存在-->>", name, ":", addressBook[name])
+ isEdit = input("是否修改联系人资料（Y/N）：")
+ if isEdit == 'Y':
+ userphone = input("请输入联系人电话：")
+ addressBook[name] = userphone
+ print("联系人修改成功")
+ continue
+ else:
+ continue
+ else:
+ userphone = input("请输入联系人电话：")
+ addressBook[name] = userphone
+ print("联系人添加成功！")
+ continue
+ if item == 3:
+if name in addressBook:
+ del addressBook[name]
+ print("删除成功！")
+ continue
+ else:
+ print("联系人不存在")
+\end{lstlisting}
+
+在功能 1 查询中，展示了字典通过键找值的过
+程。
+在功能 2 插入中，展示了简单的插入方法，即直接通过对
+addressBook[name] 赋值来实现键值对的插入、存储、修改。
+而在功能 3 中，程序通过使用
+del addressBook[name] 来实现对键值对的删除。
+ 
+
+\subsubsection{打印出如下菱形图案。}
+
+\begin{lstlisting}
+    * 
+   *** 
+  ***** 
+ ******* 
+  ***** 
+   *** 
+    *
+    
+for i in range(1,5):
+    print(' ' * (4-i),'*' *(2*i-1))
+for i in range(3,0,-1):
+    print(' ' * (4-i),'*' * (2*i-1))
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{print.png}
+    \caption{print}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsubsection{s = 2+4+6+8+⋯+n ，求让 s 不大于 100 时最大的的 n。}
+
+\begin{lstlisting}
+sum = 0
+
+for i in range(2, 100, 2):
+    sum += i
+    if sum > 100:
+        print(i-2)
+        break
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{sumup.png}
+    \caption{sumup}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{编程打印如下图所示的字符金字塔。阅读并运行程序，理解其中的算法设计与实现思路。如果最后的 print() 语句不进行缩进，会出现什么结果？为什么？}
+\begin{lstlisting}
+
+
+         A
+        BAB
+       CBABC
+      DCBABCD
+     EDCBABCDE
+    FEDCBABCDEF
+   GFEDCBABCDEFG
+  HGFEDCBABCDEFGH
+ IHGFEDCBABCDEFGHI
+
+n =  65
+
+for i in range(10):
+    print(' ' * (10-i),end='')
+
+    for j in range(i-1,-1,-1):
+        print(chr(j+n),end='' )
+
+    for j in range(1,i):
+        print(chr(j+n),end='')
+
+    print()
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{print1.png}
+    \caption{print1}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{微信红包的算法实现。阅读理解并运行下面程序，思考有没有其他的编程算法。需要导入random 库。程序代码如下：}
+\begin{lstlisting}
+import random
+
+ total = eval(input('请输入红包总金额：'))
+ num = eval(input('请输入红包个数：'))
+ min_money = 0.01
+ print("红包总金额：{0}元，红包个数：{1}".format(total, num))
+for i in range(1, num):
+    safe_total = round((total-(num-i)*min_money) / (num-i), 2)
+    money = round(random.uniform(min_money*100, safe_total*100)/100, 2)
+    total = round(total-money, 2)
+    print("第{0}个红包：{1}元，余额：{2}元".format(i, money, total))
+ print("第{0}个红包：{1}元，余额：0元".format(num, total))
+\end{lstlisting}
+
+其他的算法
+\begin{lstlisting}
+import random
+ total = eval(input('请输入红包总金额：'))
+ num = eval(input('请输入红包个数：'))
+ min_money = 0.01
+ print("红包总金额：{0}元，红包个数：{1}".format(total, num))
+ for i in range(1, num):
+ safe_total = round((total-(num-i)*min_money) / (num-i), 2)
+ money = round(random.uniform(min_money*100, safe_total*100)/100, 2)
+while (money < min_money)
+ money = round(random.uniform(min_money*100, safe_total*100)/100, 2)
+ total = round(total-money, 2)
+ print("第{0}个红包：{1}元，余额：{2}元".format(i, money, total))
+ print("第{0}个红包：{1}元，余额：0元".format(num, total))
+\end{lstlisting}
+
+
+\subsubsection{使用 opencv 库读取并显示一张本地图片。需要学习安装 opencv 库。}
+\begin{lstlisting}
+import cv2
+
+img = cv2.imread("./anime-girls.jpg")
+cv2.imshow("IMG",img)
+cv2.waitKey(0)
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{opencv.png}
+    \caption{opencv}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{阅读下列归并排序算法，体会分治算法的思想。}
+
+\begin{lstlisting}
+ def mergeSort(arr):
+    import math
+    if(len(arr) < 2):
+        return arr
+    middle = math.floor(len(arr)/2)
+    left, right = arr[0:middle], arr[middle:]
+    return merge(mergeSort(left), mergeSort(right))
+ def merge(left, right):
+    result = []
+    while left and right:
+        if left[0] <= right[0]:
+            result.append(left.pop(0))
+        else:
+            result.append(right.pop(0))
+    while left:
+        result.append(left.pop(0))
+    while right:
+        result.append(right.pop(0))
+    return result
+ if __name__ == '__main__':
+    arr = [0, 2, 3, 1, 5, 6, 4, 7, 9, 8]
+    result = mergeSort(arr)
+    print(result)
+\end{lstlisting}
+分治算法的核心思想是将复杂的问题分解成规模较小的同类问题，递归解决这些子问题，最后将子问题的解合并以解决原始问题。
+在归并排序算法中归并排序通过`mergeSort()`函数实现，它递归地将待排序数组分割成越来越小的子数组。每次分割都是将数组一分为二，直到每个子数组只包含一个元素或为空，这时可以认为子数组已经是排序好的。
+随后，算法利用`merge()`函数将这些有序的子数组合并成更大的有序数组。在合并过程中，通过两个指针分别追踪左右子数组的当前位置，比较这两个指针所指向的元素，将较小的元素放入结果数组`result`中，并移动该指针。这个过程不断重复，直到左侧或右侧子数组的所有元素都被合并到`result`中。如果其中一个子数组的所有元素都已合并完毕，而另一个子数组还有剩余元素，那么这些剩余元素由于来自有序的子数组，它们自然也是有序的。这时，可以将这些剩余元素直接复制到`result`数组的末尾。通过这种分而治之的策略，归并排序能够高效地将一个无序数组变为有序数组。
+
+
+
+\subsubsection{求解线性方程组}
+
+\begin{lstlisting}
+
+import numpy as np
+ a = np.array([[1, 0, 1], [2, 3, 4], [3, 5, 7]])
+ b = np.array([10, 33, 56])
+ y = np.linalg.solve(a, b)
+ print("x={:.2f}, y={:.2f}, z={:.2f}".format(y[0], y[1], y[2]))
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{cal.png}
+    \caption{cal}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsection{python视觉应用}
+\subsubsection{图像格式转换}
+\begin{lstlisting}
+from PIL import Image
+
+img = Image.open('input.jpg')
+
+img_converted = img.convert('RGBA')  # 转换为RGBA模式，适用于PNG
+
+img_converted.save('output.png', 'PNG')
+
+
+\end{lstlisting}
+
+\subsubsection{图像旋转}
+\begin{lstlisting}
+import cv2
+
+img = cv2.imread('anime-girls.jpg')
+
+(h, w) = img.shape[:2]
+
+rotation_matrix = cv2.getRotationMatrix2D((w / 2, h / 2), 90, 0.5)
+
+rotated_img = cv2.warpAffine(img, rotation_matrix, (w, h))
+
+cv2.imwrite('rotated_input.jpg', rotated_img)
+
+cv2.imshow('Rotated Image', rotated_img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+\end{lstlisting}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{图像旋转.png}
+    \caption{图像旋转}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{灰度变换}
+\begin{lstlisting}
+import cv2
+import numpy as np
+
+img = cv2.imread('anime-girls.jpg', cv2.IMREAD_GRAYSCALE)
+img_resized = cv2.resize(img, (300, 300))
+
+a = 1.2  #
+b = 10   
+new_img = cv2.convertScaleAbs(img, alpha=a, beta=b)
+
+cv2.imshow('Original Image', img)
+cv2.imshow('Linear Transformed Image', new_img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{灰度变换.png}
+    \caption{灰度变换}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{图像缩放}
+\begin{lstlisting}
+import cv2
+
+img = cv2.imread('original.jpg')
+
+new_width = 100
+new_height = 100
+
+resized_img = cv2.resize(img, (new_width, new_height), interpolation=cv2.INTER_AREA)
+
+cv2.imshow('Resized Image', resized_img)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+\end{lstlisting}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{缩放.png}
+    \caption{缩放}
+    \label{fig:enter-label}
+\end{figure}
+\subsubsection{图像模糊}
+
+\begin{lstlisting}
+import cv2
+
+img = cv2.imread('anime-girls.jpg')
+
+img_resized = cv2.resize(img, (300, 300))
+
+blurred_img = cv2.blur(img_resized, (5, 5))
+
+gaussian_blur_img = cv2.GaussianBlur(img_resized, (5, 5), 0)
+
+median_blur_img = cv2.medianBlur(img_resized, 5)
+
+blurred_img_resized = cv2.resize(blurred_img, (200, 200))
+gaussian_blur_img_resized = cv2.resize(gaussian_blur_img, (200, 200))
+median_blur_img_resized = cv2.resize(median_blur_img, (200, 200))
+
+cv2.imshow('Original Resized Image', img_resized)
+cv2.imshow('Blurred Image', blurred_img_resized)
+cv2.imshow('Gaussian Blurred Image', gaussian_blur_img_resized)
+cv2.imshow('Median Blurred Image', median_blur_img_resized)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+
+\end{lstlisting}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{图像模糊.png}
+    \caption{图像模糊}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsubsection{边缘检测}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{边缘检测.png}
+    \caption{边缘检测}
+    \label{fig:enter-label}
+\end{figure}
+\subsubsection{阈值分割}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{阈值分割.png}
+    \caption{阈值分割}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{图像匹配}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{图像匹配.png}
+    \caption{图像匹配}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{角点检测}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{角点检测.png}
+    \caption{角点检测}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+
+\section{解题感悟}
+通过对python的学习，我掌握一些python的基本语法。我对Python图像处理这一部分的印象尤为深刻。在此之前，我对图像处理的认识仅停留在一些基础概念上。然而，通过实践操作，我对图像处理的内在原理有了更深层次的理解。这些知识和技能无疑将对我的未来学习和职业生涯产生极大的积极影响。
+
+
+\end{document}

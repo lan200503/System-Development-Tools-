@@ -1,0 +1,260 @@
+\documentclass{ctexart}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{hyperref}
+
+%\usepackage[section]{placeins}
+
+
+
+
+\usepackage{zhnumber} % change section number to chinese
+\renewcommand\thesection{\zhnum{section}}
+\renewcommand \thesubsection {\arabic{section}}
+
+
+
+\begin{document}
+
+
+\title{中国海洋大学\\系统开发工具基础实验报告}
+\author{学生姓名：兰春光\hspace{20}学号：23020007053\hspace{20}指导老师：周小伟}
+\date{\hspace{5}实验时间：\today}
+\maketitle
+\footnotesize\tableofcontents
+
+
+
+
+\section{实验名称：版本控制，\LaTeX 文档编辑}
+
+github 链接：\href{URL}{https://github.com/lan200503/System-Development-Tools-}
+
+\section{实验实例（内容和结果）}
+
+\subsection{版本控制}
+
+\subsubsection{git init}
+创建本地仓库\\
+\begin{figure}[h]
+    
+    \centering
+    \includegraphics[width=0.5\linewidth]{git init.png}
+    \caption{git init}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{git clone}
+克隆本地仓库\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{git clone.png}
+    \caption{git clone}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{git add}
+创建文件并添加文件到暂存区\\
+\begin{figure}[H] 
+    
+    \centering
+    \includegraphics[width=0.5\linewidth]{git add.png}
+    \caption{git add}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{git status}
+查看仓库状态\\
+\begin{figure}[h]    
+    \centering
+    \includegraphics[width=0.5\linewidth]{git status.png}
+    \caption{git status}
+    \label{fig:enter-label}
+    %\FloatBarrier
+\end{figure}
+
+\subsubsection{git reset}
+回退仓库版本\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{git reset.png}
+    \caption{git reset}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{git commit}
+提交暂存区的文件到本地仓库
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{git commit.png}
+    \caption{git commit}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsubsection{git log}
+查看仓库的提交记录
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{git log.png}
+    \caption{git log}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{git diff}
+默认查看工作区和暂存区的区别
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{git diff.png}
+    \caption{git diff}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{git rm}
+删除暂存区和工作区的文件
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{git rm.png}
+    \caption{git rm}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{git ls-files}
+查看缓存区的所有文件
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{git ls-files.png}
+    \caption{git ls-files}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsection{版本控制 习题}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{习题.png}
+    \caption{习题}
+    \label{fig:enter-label}
+\end{figure}
+\subsubsection{可视化}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{可视化.png}
+    \caption{git log --all --graph --decorate}
+    \label{fig:enter-label}
+\end{figure}
+\subsubsection{谁最后修改了README.md}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{修改README.png}
+    \caption{git log README.md}
+    \label{fig:enter-label}
+\end{figure}
+\subsubsection{修改某个文件的提交信息}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{git blame.png}
+    \caption{git blame _config.yml}
+    \label{fig:enter-label}
+\end{figure}
+
+
+
+\subsection{\LaTeX 文档编辑}
+\subsubsection{documentclass}
+设置文档类型
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{documentclass.png}
+    \caption{documentclass}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{usepackage}
+调用宏包\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{usepackage{ctex}.png}
+    \caption{usepackage{ctex}}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{section}
+设置标题，副标题\\
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\linewidth]{section.png}
+    \caption{section}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{title,author,date}
+设置标题作者日期，制作封面\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{title.png}
+    \caption{title}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{equation}
+插入公式并用了希腊字母\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{equation.png}
+    \caption{equation}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{graphics}
+插入图片\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{graphics.png}
+    \caption{graphics}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{label,ref}
+设置标签和引用\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{lable.png}
+    \caption{lable}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{tableofcontents}
+生成目录，跟section等有关\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{tableofcontents.png}
+    \caption{tableofcontents}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{font effects}
+各种字体效果\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{font effects.png}
+    \caption{font effects}
+    \label{fig:enter-label}
+\end{figure}
+
+\subsubsection{size}
+各种字体大小，但不限于字体，可以用于目录\\
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{size.png}
+    \caption{size}
+    \label{fig:enter-label}
+\end{figure}
+
+\section{解题感悟}
+通过使用git创建本地仓库，并与github上的远程仓库进行链接，让我感受到了git的强大以及git的实用程度，我要持续跟进学习，尽量掌握git常用指令。\\ 
+通过使用latex编辑文档，了解到latex在某些方面编辑文档的便捷性，掌握latex的语法十分必要，对以后编辑文档十分受益。
+
+
+
+\end{document}
